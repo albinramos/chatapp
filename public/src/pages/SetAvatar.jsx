@@ -30,9 +30,8 @@ function SetAvatar() {
         navigate('/login')
       }
     }
-  
     checkAuthentication();
-  }, []);
+  }, [navigate]);
 
   const setProfilePicture = async () => {
     if(selectedAvatar === undefined){
