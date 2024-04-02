@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { allUsersRoute } from '../utils/APIRoutes';
 import Contacts from '../components/Contacts';
+import Welcome from '../components/Welcome';
+import ChatContainer from '../components/ChatContainer';
 
 
 function Chat() {
@@ -12,6 +14,7 @@ function Chat() {
   const [currentUser, setCurrentUser] = useState(undefined);
 
   const [currentChat, setCurrentChat] = useState(undefined);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const navigate = useNavigate();
 
@@ -22,6 +25,7 @@ function Chat() {
       } else {
         const user = await JSON.parse(localStorage.getItem('chat-app-user'));
         setCurrentUser(user);
+        setIsLoaded(true);
       }
     }
     checkAuthentication();
@@ -55,9 +59,16 @@ function Chat() {
 
   return (
     <>
-      <Container>
+      <Container> 
         <div className="container">
           <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
+          {
+            isLoaded && currentChat === undefined ? (
+              <Welcome currentUser={currentUser} />
+            ) : (
+              <ChatContainer currentChat={currentChat} />
+            )
+          }
         </div>
       </Container>
     </>
