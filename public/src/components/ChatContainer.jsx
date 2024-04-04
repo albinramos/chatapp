@@ -1,8 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import Logout from './Logout';
+import ChatInput from './ChatInput';
+import Messages from './Messages';
 
 function ChatContainer({currentChat}) {
+
+  const handleSendMsg = async (msg) => {
+    alert(msg);
+  };
+
 
   return (
     <>
@@ -19,8 +26,8 @@ function ChatContainer({currentChat}) {
             </div>
             <Logout />
           </div>
-        <div className="chat-messages"></div>
-        <div className="chat-input"></div>
+        <Messages />
+        <ChatInput  handleSendMsg = {handleSendMsg} />
       </Container>
     )}
     </>
@@ -31,6 +38,7 @@ const Container = styled.div`
 padding-top: 1rem;
 .chat-header{
   display:flex;
+  
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
